@@ -14,8 +14,8 @@ import SaveIcon from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-/** @type {import('@material-ui/core/styles').StyleRules} */
-const styles = {
+/** @type {import('@material-ui/core/styles').StyleRulesCallback} */
+const styles = theme => ({
   container: {
     width: '75%'
   },
@@ -29,6 +29,9 @@ const styles = {
     paddingTop: 0,
     marginLeft: '-0.75rem'
   },
+  avatar: {
+    backgroundColor: theme.palette.primary.light
+  },
   actions: {
     padding: '0.5rem'
   },
@@ -38,7 +41,7 @@ const styles = {
   button: {
     padding: '0.50rem'
   }
-}
+})
 
 /**
  * @param {object} props
@@ -51,7 +54,7 @@ function UserPanel({ classes }) {
         expandIcon={<ExpandMoreIcon />}
         classes={{ content: classes.grid }}
       >
-        <Avatar>A</Avatar>
+        <Avatar className={classes.avatar}>A</Avatar>
         <Typography>Krikchai</Typography>
         <Typography>Pongtaveewould</Typography>
       </ExpansionPanelSummary>
@@ -59,9 +62,9 @@ function UserPanel({ classes }) {
         className={classNames(classes.grid, classes.details)}
       >
         <div style={{ width: '2.5rem' }} />
-        <FilledInput placeholder="name" classes={{ input: classes.input }} />
+        <FilledInput placeholder="Name" classes={{ input: classes.input }} />
         <FilledInput
-          placeholder="lastname"
+          placeholder="Lastname"
           classes={{ input: classes.input }}
         />
       </ExpansionPanelDetails>

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
 
+import CreateButton from 'components/CreateButton'
 import UserPanel from 'components/UserPanel'
 
 /** @type {import('@material-ui/core/styles').StyleRules} */
@@ -13,7 +14,14 @@ const styles = {
   },
   container: {
     minHeight: '25rem',
-    padding: '1.5rem 0'
+    padding: '1.5rem 0',
+    position: 'relative'
+  },
+  create: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    transform: 'translate(-50%, -50%)'
   }
 }
 
@@ -33,6 +41,7 @@ function App({ classes }) {
               <UserPanel />
               <UserPanel />
             </Grid>
+            <CreateButton className={classes.create} />
           </Paper>
         </Grid>
       </Grid>
