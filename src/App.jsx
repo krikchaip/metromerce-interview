@@ -4,13 +4,16 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
 
+import UserPanel from 'components/UserPanel'
+
 /** @type {import('@material-ui/core/styles').StyleRules} */
 const styles = {
   root: {
     padding: '3rem'
   },
   container: {
-    height: '25rem'
+    minHeight: '25rem',
+    padding: '1.5rem 0'
   }
 }
 
@@ -25,6 +28,11 @@ function App({ classes }) {
       <Grid container justify="center" className={classes.root}>
         <Grid item xs={8}>
           <Paper className={classes.container}>
+            <Grid container alignItems="center" direction="column">
+              <UserPanel />
+              <UserPanel />
+              <UserPanel />
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
