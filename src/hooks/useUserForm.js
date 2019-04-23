@@ -1,28 +1,28 @@
 import { useState } from 'react'
 
 /**
- * @typedef {object} CreateFormState
+ * @typedef {object} UserFormState
  * @property {string} firstname
  * @property {string} lastname
  */
 
 /**
- * @typedef {object} CreateFormStateSetter
+ * @typedef {object} UserFormStateSetter
  * @property {(first: string) => void} firstname
  * @property {(last: string) => void} lastname
  * @property {() => void} reset
  */
 
-/** @type {CreateFormState} */
+/** @type {UserFormState} */
 const initialState = {
   firstname: '',
   lastname: ''
 }
 
 /**
- * @return {[CreateFormState, CreateFormStateSetter]}
+ * @return {[UserFormState, UserFormStateSetter]}
  */
-function useCreateForm() {
+function useUserForm() {
   const [state, setState] = useState(initialState)
 
   /** @param {string} first */
@@ -42,4 +42,4 @@ function useCreateForm() {
   return [state, { firstname, lastname, reset }]
 }
 
-export default useCreateForm
+export default useUserForm

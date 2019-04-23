@@ -12,7 +12,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import useCreateForm from 'hooks/useCreateForm'
+import useUserForm from 'hooks/useUserForm'
 
 /** @type {import('@material-ui/core/styles').StyleRules} */
 const styles = {
@@ -35,10 +35,10 @@ const styles = {
  * @param {object} props
  * @param {string} props.className
  * @param {Object<string, string>} props.classes
- * @param {(user: import('hooks/useCreateForm').CreateFormState) => void} [props.onSubmit]
+ * @param {(user: import('hooks/useUserForm').UserFormState) => void} [props.onSubmit]
  */
 function CreateButton({ onSubmit = () => {}, className, classes }) {
-  const [user, setUser] = useCreateForm()
+  const [user, setUser] = useUserForm()
   const [anchorEL, updateAnchorEl] = useState(
     /** @type {HTMLElement?} */ (null)
   )

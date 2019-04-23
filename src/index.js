@@ -8,12 +8,18 @@ import 'typeface-roboto'
 import App from './components/App'
 import rootReducer from 'reducers'
 
+/** @type {AppState} */
+const initialState = {
+  users: [{ id: '0', name: 'Krikchai', lastname: 'Pongtaveewould' }]
+}
+
 /** @type {import('redux').Store<AppState, AppActions>} */
 const store = createStore(
   rootReducer,
-  typeof window !== 'undefined'
-  && window['__REDUX_DEVTOOLS_EXTENSION__']
-  && window['__REDUX_DEVTOOLS_EXTENSION__']()
+  initialState,
+  typeof window !== 'undefined' &&
+    window['__REDUX_DEVTOOLS_EXTENSION__'] &&
+    window['__REDUX_DEVTOOLS_EXTENSION__']()
 )
 
 ReactDOM.render(

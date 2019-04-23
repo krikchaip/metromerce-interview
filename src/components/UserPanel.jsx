@@ -14,6 +14,8 @@ import SaveIcon from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 
+import useUserForm from 'hooks/useUserForm'
+
 /** @type {import('@material-ui/core/styles').StyleRulesCallback} */
 const styles = theme => ({
   container: {
@@ -46,34 +48,50 @@ const styles = theme => ({
 /**
  * @param {object} props
  * @param {Object<string, string>} props.classes
+ * @param {User} props.data
+ * @param {(newData: import('hooks/useUserForm').UserFormState) => void} [props.onUpdate]
+ * @param {() => void} [props.onDelete]
  */
-function UserPanel({ classes }) {
+function UserPanel({
+  data,
+  onUpdate = () => {},
+  onDelete = () => {},
+  classes
+}) {
+  const [user, setUser] = useUserForm()
   return (
     <ExpansionPanel className={classes.container}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         classes={{ content: classes.grid }}
       >
-        <Avatar className={classes.avatar}>A</Avatar>
-        <Typography>Krikchai</Typography>
-        <Typography>Pongtaveewould</Typography>
+        <Avatar className={classes.avatar}>{data.name[0].toUpperCase()}</Avatar>
+        <Typography>{data.name}</Typography>
+        <Typography>{data.lastname}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails
         className={classNames(classes.grid, classes.details)}
       >
         <div style={{ width: '2.5rem' }} />
-        <FilledInput placeholder="Name" classes={{ input: classes.input }} />
+        <FilledInput
+          placeholder="Name"
+          classes={{ input: classes.input }}
+          value={user.firstname}
+          onChange={e => setUser.firstname(e.target.value)}
+        />
         <FilledInput
           placeholder="Lastname"
           classes={{ input: classes.input }}
+          value={user.lastname}
+          onChange={e => setUser.lastname(e.target.value)}
         />
       </ExpansionPanelDetails>
       <Divider />
       <ExpansionPanelActions className={classes.actions}>
-        <IconButton className={classes.button}>
+        <IconButton className={classes.button} onClick={() => onUpdate(user)}>
           <SaveIcon fontSize="small" />
         </IconButton>
-        <IconButton className={classes.button}>
+        <IconButton className={classes.button} onClick={onDelete}>
           <DeleteIcon fontSize="small" />
         </IconButton>
       </ExpansionPanelActions>

@@ -8,7 +8,7 @@ import CreateButton from 'components/CreateButton'
  */
 const mapDispatchToProps = dispatch => ({
   /**
-   * @param {import('hooks/useCreateForm').CreateFormState} user
+   * @param {import('hooks/useUserForm').UserFormState} user
    */
   onSubmit: user => dispatch(createUser(user.firstname, user.lastname))
 })
