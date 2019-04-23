@@ -39,6 +39,7 @@ const styles = {
  */
 function CreateButton({ onSubmit = () => {}, className, classes }) {
   const [user, setUser] = useUserForm()
+  const validated = user.firstname.length > 0
   const [anchorEL, updateAnchorEl] = useState(
     /** @type {HTMLElement?} */ (null)
   )
@@ -92,7 +93,11 @@ function CreateButton({ onSubmit = () => {}, className, classes }) {
           />
         </CardContent>
         <CardActions className={classes.actions}>
-          <IconButton className={classes.button} onClick={handleSubmit}>
+          <IconButton
+            disabled={!validated}
+            className={classes.button}
+            onClick={handleSubmit}
+          >
             <CheckIcon fontSize="small" />
           </IconButton>
           <IconButton className={classes.button} onClick={handleClose}>

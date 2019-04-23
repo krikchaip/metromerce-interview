@@ -59,6 +59,7 @@ function UserPanel({
   classes
 }) {
   const [user, setUser] = useUserForm()
+  const validated = user.firstname.length > 0
 
   function handleUpdate() {
     onUpdate(data.id, user)
@@ -98,7 +99,11 @@ function UserPanel({
       </ExpansionPanelDetails>
       <Divider />
       <ExpansionPanelActions className={classes.actions}>
-        <IconButton className={classes.button} onClick={handleUpdate}>
+        <IconButton
+          disabled={!validated}
+          className={classes.button}
+          onClick={handleUpdate}
+        >
           <SaveIcon fontSize="small" />
         </IconButton>
         <IconButton className={classes.button} onClick={handleDelete}>
