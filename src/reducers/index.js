@@ -9,13 +9,18 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   const { users } = state
   switch (action.type) {
-    case 'USER_CREATE':
+    case 'USER_CREATE': {
       const { first: name, last: lastname } = action.name
       return { users: users.concat({ id: uuid(), name, lastname }) }
-    case 'USER_UPDATE':
+    }
+    case 'USER_UPDATE': {
+      const { first: name, last: lastname } = action.data
+      const newData = { id: action.id, name, lastname }
+      return { users: users.map(u => (newData.id === u.id ? newData : u)) }
+    }
+    case 'USER_DELETE': {
       return state
-    case 'USER_DELETE':
-      return state
+    }
     default:
       return state
   }

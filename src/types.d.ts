@@ -10,7 +10,9 @@ interface UserCreateAction {
 }
 
 interface UserUpdateAction {
-  type: 'USER_UPDATE'
+  type: 'USER_UPDATE',
+  id: string,
+  data: { first: string, last: string }
 }
 
 interface UserDeleteAction {

@@ -4,7 +4,7 @@ import { createUser } from 'actions'
 import CreateButton from 'components/CreateButton'
 
 /**
- * @param {import('redux').Dispatch} dispatch
+ * @param {import('redux').Dispatch<AppActions>} dispatch
  */
 const mapDispatchToProps = dispatch => ({
   /**

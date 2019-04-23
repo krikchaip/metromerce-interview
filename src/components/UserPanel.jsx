@@ -49,8 +49,8 @@ const styles = theme => ({
  * @param {object} props
  * @param {Object<string, string>} props.classes
  * @param {User} props.data
- * @param {(newData: import('hooks/useUserForm').UserFormState) => void} [props.onUpdate]
- * @param {() => void} [props.onDelete]
+ * @param {(id: string, newData: import('hooks/useUserForm').UserFormState) => void} [props.onUpdate]
+ * @param {(id: string) => void} [props.onDelete]
  */
 function UserPanel({
   data,
@@ -59,6 +59,16 @@ function UserPanel({
   classes
 }) {
   const [user, setUser] = useUserForm()
+
+  function handleUpdate() {
+    onUpdate(data.id, user)
+    setUser.reset()
+  }
+
+  function handleDelete() {
+    onDelete(data.id)
+  }
+
   return (
     <ExpansionPanel className={classes.container}>
       <ExpansionPanelSummary
@@ -88,10 +98,10 @@ function UserPanel({
       </ExpansionPanelDetails>
       <Divider />
       <ExpansionPanelActions className={classes.actions}>
-        <IconButton className={classes.button} onClick={() => onUpdate(user)}>
+        <IconButton className={classes.button} onClick={handleUpdate}>
           <SaveIcon fontSize="small" />
         </IconButton>
-        <IconButton className={classes.button} onClick={onDelete}>
+        <IconButton className={classes.button} onClick={handleDelete}>
           <DeleteIcon fontSize="small" />
         </IconButton>
       </ExpansionPanelActions>

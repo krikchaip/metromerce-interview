@@ -4,6 +4,15 @@ export const createUser = (first, last) => ({
   name: { first, last }
 })
 
-export const updateUser = undefined
+/**
+ * @param {string} id
+ * @param {{ first: string, last: string }} data
+ * @return {UserUpdateAction}
+ */
+export const updateUser = (id, data) => ({
+  type: 'USER_UPDATE',
+  id,
+  data
+})
 
 export const deleteUser = undefined
