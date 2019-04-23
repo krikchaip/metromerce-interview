@@ -15,4 +15,8 @@ export const updateUser = (id, data) => ({
   data
 })
 
-export const deleteUser = undefined
+/** @type {(id: string) => UserDeleteAction} */
+export const deleteUser = id => ({
+  type: 'USER_DELETE',
+  id
+})

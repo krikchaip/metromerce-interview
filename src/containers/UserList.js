@@ -1,20 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateUser } from 'actions'
+import { updateUser, deleteUser } from 'actions'
 import UserPanel from 'components/UserPanel'
 
 /**
  * @param {object} props
  * @param {User[]} props.users
  * @param {(id: string, newData: import('hooks/useUserForm').UserFormState) => void} props.updater
- *
+ * @param {(id: string) => void} props.deleter
  */
-function UserList({ users, updater }) {
+function UserList({ users, updater, deleter }) {
   return (
     <React.Fragment>
       {users.map(u => (
-        <UserPanel data={u} onUpdate={updater} />
+        <UserPanel data={u} onUpdate={updater} onDelete={deleter} />
       ))}
     </React.Fragment>
   )
@@ -34,7 +34,10 @@ const mapDispatchToProps = dispatch => ({
    * @param {{ firstname: string, lastname: string }} data
    */
   updater: (id, data) =>
-    dispatch(updateUser(id, { first: data.firstname, last: data.lastname }))
+    dispatch(updateUser(id, { first: data.firstname, last: data.lastname })),
+
+  /** @param {string} id */
+  deleter: id => dispatch(deleteUser(id))
 })
 
 export default connect(

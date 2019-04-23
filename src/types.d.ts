@@ -16,7 +16,8 @@ interface UserUpdateAction {
 }
 
 interface UserDeleteAction {
-  type: 'USER_DELETE'
+  type: 'USER_DELETE',
+  id: string
 }
 
 type UserActions =

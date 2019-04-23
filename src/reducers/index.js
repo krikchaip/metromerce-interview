@@ -19,7 +19,8 @@ function rootReducer(state = initialState, action) {
       return { users: users.map(u => (newData.id === u.id ? newData : u)) }
     }
     case 'USER_DELETE': {
-      return state
+      const { id } = action
+      return { users: users.filter(u => u.id !== id) }
     }
     default:
       return state
