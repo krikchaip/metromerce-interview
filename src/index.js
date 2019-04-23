@@ -9,7 +9,12 @@ import App from './components/App'
 import rootReducer from 'reducers'
 
 /** @type {import('redux').Store<AppState, AppActions>} */
-const store = createStore(rootReducer)
+const store = createStore(
+  rootReducer,
+  typeof window !== 'undefined'
+  && window['__REDUX_DEVTOOLS_EXTENSION__']
+  && window['__REDUX_DEVTOOLS_EXTENSION__']()
+)
 
 ReactDOM.render(
   <Provider store={store}>

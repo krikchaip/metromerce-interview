@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 
+import useCreateForm from 'hooks/useCreateForm'
+
 /** @type {import('@material-ui/core/styles').StyleRules} */
 const styles = {
   content: {
@@ -33,24 +35,36 @@ const styles = {
  * @param {object} props
  * @param {string} props.className
  * @param {Object<string, string>} props.classes
+ * @param {(user: import('hooks/useCreateForm').CreateFormState) => void} [props.onSubmit]
  */
-function CreateButton({ className, classes }) {
+function CreateButton({ onSubmit = () => {}, className, classes }) {
+  const [user, setUser] = useCreateForm()
   const [anchorEL, updateAnchorEl] = useState(
     /** @type {HTMLElement?} */ (null)
   )
 
+  /** @param {React.MouseEvent<HTMLElement, MouseEvent>} event */
+  function handleOpen(event) {
+    updateAnchorEl(event.currentTarget)
+  }
+
+  function handleClose() {
+    updateAnchorEl(null)
+  }
+
+  function handleSubmit() {
+    onSubmit(user)
+    setUser.reset()
+  }
+
   return (
     <React.Fragment>
-      <Fab
-        color="secondary"
-        className={className}
-        onClick={e => updateAnchorEl(e.currentTarget)}
-      >
+      <Fab color="secondary" className={className} onClick={handleOpen}>
         <AddIcon />
       </Fab>
       <Popover
         anchorEl={anchorEL}
-        onClose={() => updateAnchorEl(null)}
+        onClose={handleClose}
         open={Boolean(anchorEL)}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -64,17 +78,24 @@ function CreateButton({ className, classes }) {
           >
             Create a new user
           </Typography>
-          <TextField margin="dense" label="Name" />
-          <TextField margin="dense" label="Lastname" />
+          <TextField
+            margin="dense"
+            label="Name"
+            value={user.firstname}
+            onChange={e => setUser.firstname(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            label="Lastname"
+            value={user.lastname}
+            onChange={e => setUser.lastname(e.target.value)}
+          />
         </CardContent>
         <CardActions className={classes.actions}>
-          <IconButton className={classes.button}>
+          <IconButton className={classes.button} onClick={handleSubmit}>
             <CheckIcon fontSize="small" />
           </IconButton>
-          <IconButton
-            className={classes.button}
-            onClick={() => updateAnchorEl(null)}
-          >
+          <IconButton className={classes.button} onClick={handleClose}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </CardActions>

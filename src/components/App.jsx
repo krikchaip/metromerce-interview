@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import CreateButton from 'components/CreateButton'
 import UserPanel from 'components/UserPanel'
+import CreateButtonContainer from 'containers/CreateButtonContainer'
 
 /** @type {import('@material-ui/core/styles').StyleRules} */
 const styles = {
@@ -41,7 +41,7 @@ function App({ classes }) {
               <UserPanel />
               <UserPanel />
             </Grid>
-            <CreateButton className={classes.create} />
+            <CreateButtonContainer className={classes.create} />
           </Paper>
         </Grid>
       </Grid>
